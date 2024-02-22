@@ -1,95 +1,283 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client"
+
+import { useEffect, useState, useLayoutEffect } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { FaSquareFacebook, FaInstagram } from "react-icons/fa6";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { animated, useSpring, easings } from '@react-spring/web'
+
+import { gobold, berlingskeSerif, delaGothicOne } from '@/libs/fonts';
+import Menu from '@/components/Menu';
+import Footer from '@/components/Footer';
+import Header from '@/components/Header';
+import CustomCursor from '@/components/CustomCursor';
+import Fall from '@/components/Fall';
+import styles from "./page.module.scss";
+
+const SectionTitle = ({ children }) => {
+  return (
+    <h2 className={styles.section__title + " " + gobold.className}>
+      {
+        children.replaceAll(" ", '\u00A0').split("").map((e, i) => <span className={styles.section__titleChar} key={i}>{e}</span>)
+      }
+    </h2>
+  )
+}
 
 export default function Home() {
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const [focusOn, setFocusOn] = useState(null);
+  const [mousePos, setMousePos] = useState({});
+  const [props, api] = useSpring(() => ({
+    x: 0,
+    y: 0,
+    xy: [0, 0],
+  }));
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.timeline()
+        .to(`.${styles.landing__yetiContainer}`, { filter: "blur(0px)", duration: 1 })
+        .set(`.${styles.landing__imgContainer}`, { autoAlpha: 1 }, 2.05)
+        .set(`.${styles.landing__title}`, { autoAlpha: 1 }, 2.05)
+        .from(`.${styles.landing__lugeContainer}`, {
+          x: 200,
+          y: 200,
+          duration: 1,
+        }, 2)
+        .from(`.${styles.landing__lunettesContainer}`, {
+          x: -200,
+          y: -200,
+          duration: 1,
+        }, 2)
+        .from(`.${styles.landing__pilsContainer}`, {
+          x: -200,
+          y: 200,
+          duration: 1,
+        }, 2)
+        .from(`.landing__titleChar`, {
+          y: 30,
+          opacity: 0,
+          // scaleY: 0,
+          stagger: 0.08,
+          duration: 1
+        }, 2);
+    })
+
+    return () => {
+      ctx.revert();
+    };
+  }, []);
+
+  const calc = (x, y) => [x - window.innerWidth / 2, y - window.innerHeight / 2];
+  const transYeti = (x, y) => `translate(-50%, -50%) translate3d(${x / 50}px, ${y / 50}px, 0) rotate(${(x + y) / 400}deg)`;
+  const transLuge = (x, y) => `translate3d(${x / 20}px, ${-y / 20}px, 0) rotate(${30 + -(x + y) / 200}deg)`;
+  const transLunettes = (x, y) => `translate3d(${x / 20}px, ${-y / 20}px, 0) rotate(${(x - y) / 70}deg)`;
+  const transPils = (x, y) => `translate3d(${-x / 20}px, ${-y / 20}px, 0) rotate(${-(x + y) / 40}deg)`;
+
+  const animations = [
+    { imageName: "luge4", alt: "Luge", transformFn: transLuge, className: styles.landing__lugeContainer, label: "Nos partenaires", angle: 7, link: "/partenaires" },
+    { imageName: "pils4", alt: "Pils", transformFn: transPils, className: styles.landing__pilsContainer, label: "Nos évènements", angle: -3, link: "/events" },
+    { imageName: "lunettes4", alt: "Lunettes", transformFn: transLunettes, className: styles.landing__lunettesContainer, label: "Espace admis", angle: -2, link: "/espace-admis" },
+    { imageName: "yeti2", alt: "Yéti", transformFn: transYeti, className: styles.landing__yetiContainer, label: "L'équipe", angle: 4, link: "/l-equipe" }
+  ]
+
+  const handleMouseOver = (e, imageName) => {
+    setFocusOn(imageName);
+  }
+
+  const handleMouseLeave = () => {
+    setFocusOn(null);
+  }
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const ctx = gsap.context(() => {
+
+      /// SCROLL REVEAL //////////////////////////////
+      gsap.from(`.${styles.section__enseaImgContainer}`, {
+        clipPath: "inset(0px 50%)",
+        ease: "power1.out",
+        scrollTrigger: {
+          trigger: `.${styles.section__enseaImgContainer}`,
+          start: "top bottom",
+          end: "top 10%",
+          scrub: true,
+        }
+      })
+
+      gsap.from(`.${styles.section__enseaImg}`, {
+        scale: 1.2,
+        scrollTrigger: {
+          trigger: `.${styles.section__enseaImgContainer}`,
+          start: "top bottom",
+          scrub: true,
+        }
+      })
+
+      document.querySelectorAll(`.${styles.section__title}`).forEach(e => {
+        gsap.from(e.querySelectorAll(`.${styles.section__titleChar}`), {
+          y: 30,
+          rotate: 15,
+          opacity: 0,
+          scaleY: 0,
+          stagger: 0.08,
+          scrollTrigger: {
+            trigger: e,
+            start: "top bottom",
+            end: "top 5%",
+            scrub: true,
+          }
+        });
+      })
+
+      document.querySelectorAll(`.${styles.section__text}`).forEach(e => {
+        gsap.from(e, {
+          opacity: 0,
+          ease: "power1.in",
+          scrollTrigger: {
+            trigger: e,
+            start: "top 100%",
+            end: "top 30%",
+            scrub: true,
+          }
+        });
+      })
+      /////////////////////////////////////////////
+    })
+
+    return () => {
+      ctx.revert();
+    };
+  }, []);
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.js</code>
-        </p>
+    <div>
+      <Menu isOpen={menuIsOpen} />
+      <CustomCursor />
+      <Fall />
+      <Header menuIsOpen={menuIsOpen} setMenuIsOpen={setMenuIsOpen} />
+
+      <section
+        className={styles.landing}
+        onMouseOver={({ clientX: x, clientY: y }) => {
+          setMousePos({ x, y });
+        }}
+        onMouseMove={({ clientX: x, clientY: y }) => {
+          const xy = calc(x, y);
+          setMousePos({ x, y });
+          api.start({ xy, x, y, config: { duration: 3000, easing: easings.easeOutExpo } });
+
+        }}
+      >
+        {
+          animations.map((e, i) => (
+            <Link
+              key={i}
+              onMouseOver={event => handleMouseOver(event, e.imageName)}
+              onMouseLeave={() => handleMouseLeave()}
+              href={e.link}
+              onClick={e => e.stopPropagation()}
+            >
+              <animated.div
+                className={styles.landing__imgContainer + " " + e.className}
+                style={{ transform: props.xy.to(e.transformFn), opacity: focusOn === null || e.imageName === focusOn ? 1 : .3 }}
+              >
+                <Image fill={true} src={`/images/${e.imageName}.png`} alt={e.alt} />
+              </animated.div>
+              <div
+                className={styles.landing__label + " " + gobold.className}
+                style={{
+                  position: "absolute",
+                  top: `${mousePos.y}px`,
+                  left: `${mousePos.x}px`,
+                  transform: `rotate(${e.angle}deg) translateX(5%) scale(${e.imageName === focusOn ? 1 : 0})`
+                }}
+              >
+                {e.label}
+              </div>
+            </Link>
+          ))
+        }
+        <h1 className={styles.landing__title + " " + delaGothicOne.className}>
+          {
+            "BDE\u00A0ENSEA".split("").map((e, i) => <span className={"landing__titleChar"} key={i}>{e}</span>)
+          }
+        </h1>
+      </section >
+      <section className={styles.section}>
+        <SectionTitle>Félicitations aux admis !</SectionTitle>
         <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
+          <p className={styles.section__text + " " + berlingskeSerif.className}>
+            Toutes nos félicitations pour ta réussite aux concours et ton admission à l'ENSEA ! 🥳<br />
+            Nous sommes heureux de pouvoir te compter parmi nous l'année scolaire prochaine et sommes prêts à t'accueillir le lundi 4 septembre lors de la rentrée.<br />
+            Avant cela, ton BDE est là pour te donner toutes les informations nécessaires pour que ton début d'année se passe au mieux !
           </p>
-        </a>
-      </div>
-    </main>
+          <span className={styles.link + " " + berlingskeSerif.className}>
+            <Link href="/espace-admis">
+              Voir
+              <span className={styles.link__underlinedText + " " + gobold.className}>
+                l'espace admis
+                <div className={styles.link__underline}></div>
+              </span>
+            </Link>
+          </span>
+        </div>
+      </section>
+      <section className={styles.section + " " + styles.section_admis}>
+        <div>
+          <SectionTitle>Le BDE</SectionTitle>
+          <p className={styles.section__text + " " + berlingskeSerif.className}>
+            Le BDE (Bureau des Élèves) est une organisation étudiante gérée <strong>par les élèves</strong>, <strong>pour les élèves</strong>. C'est une association à but non lucratif qui joue un rôle important dans la vie étudiante de notre école.<br />
+            Notre objectif est de créer un environnement enrichissant, solidaire et épanouissant tout au long de l'année.<br />
+            Cela passe par nos différentes missions : accueil des élèves, animation et organisations d'évènements, représentation et services pour les étudiants.
+          </p>
+        </div>
+        <div className={styles.socials}>
+          <SectionTitle>Rejoins-nous</SectionTitle>
+          <div className={styles.section__text + " " + berlingskeSerif.className}>
+            Rejoins la communauté Ensearque sur les réseaux sociaux pour te tenir au courant des prochains évènements.
+            <br /><br />
+            <div className={styles.section__linkContainer}>
+              <FaSquareFacebook className={styles.faIcon} />
+              <span className={styles.link + " " + berlingskeSerif.className}>
+                <a href="https://www.facebook.com/groups/607323524520866" target='_blank'>
+                  <span className={styles.link__underlinedText + " " + gobold.className}>
+                    ENSEA Promo 2026
+                    <div className={styles.link__underline}></div>
+                  </span>
+                </a>
+              </span>
+            </div>
+            <br /><br />
+            <div className={styles.section__linkContainer}>
+              <FaInstagram className={styles.instaIcon} />
+              <span className={styles.link + " " + berlingskeSerif.className}>
+                <a href="https://www.instagram.com/bdeensea/" target='_blank'>
+                  <span className={styles.link__underlinedText + " " + gobold.className}>
+                    BDE Ensea
+                    <div className={styles.link__underline}></div>
+                  </span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className={styles.section}>
+        <SectionTitle>L'école</SectionTitle>
+        <p className={styles.section__text + " " + berlingskeSerif.className}>
+          Depuis plus de 70 ans, l'ENSEA forme des ingénieurs généralistes reconnus dans le monde industriel et à l'international. Classée parmi les meilleures Grandes Ecoles, elle délivre 5 diplômes d'excellence, multi-certifiés et réputés.<br />
+          Grâce à la qualité de ses enseignants et à ses laboratoires de recherche de renommée internationale, l'ENSEA poursuit son objectif : former des experts de l'<strong>électronique</strong>, de l'<strong>informatique</strong> et des <strong>télécommunications</strong>, passionnés, responsables et innovants.
+        </p>
+        <div className={styles.section__enseaImgContainer}>
+          <Image className={styles.section__enseaImg} src="/images/ensea.png" width={1140} height={810} alt="ENSEA" />
+        </div>
+      </section>
+      <Footer />
+    </div>
   );
 }
