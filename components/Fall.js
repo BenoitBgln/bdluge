@@ -20,9 +20,10 @@ export default function Fall({ }) {
         const cw = document.body.clientWidth
         const ch = document.body.clientHeight
 
+        const engineRef = engine.current;
         const render = Render.create({
             element: scene.current,
-            engine: engine.current,
+            engine: engineRef,
             options: {
                 width: cw,
                 height: ch,
@@ -44,8 +45,8 @@ export default function Fall({ }) {
         return () => {
             document.removeEventListener('click', handleClick);
             Render.stop(render)
-            World.clear(engine.current.world)
-            Engine.clear(engine.current)
+            World.clear(engineRef.world)
+            Engine.clear(engineRef)
             render.canvas.remove()
             render.canvas = null
             render.context = null

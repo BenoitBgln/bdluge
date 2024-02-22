@@ -212,15 +212,15 @@ export default function Home() {
         <SectionTitle>Félicitations aux admis !</SectionTitle>
         <div>
           <p className={styles.section__text + " " + berlingskeSerif.className}>
-            Toutes nos félicitations pour ta réussite aux concours et ton admission à l'ENSEA ! 🥳<br />
-            Nous sommes heureux de pouvoir te compter parmi nous l'année scolaire prochaine et sommes prêts à t'accueillir le lundi 4 septembre lors de la rentrée.<br />
-            Avant cela, ton BDE est là pour te donner toutes les informations nécessaires pour que ton début d'année se passe au mieux !
+            Toutes nos félicitations pour ta réussite aux concours et ton admission à l&apos;ENSEA ! 🥳<br />
+            Nous sommes heureux de pouvoir te compter parmi nous l&apos;année scolaire prochaine et sommes prêts à t&apos;accueillir le lundi 4 septembre lors de la rentrée.<br />
+            Avant cela, ton BDE est là pour te donner toutes les informations nécessaires pour que ton début d&apos;année se passe au mieux !
           </p>
           <span className={styles.link + " " + berlingskeSerif.className}>
             <Link href="/espace-admis">
               Voir
               <span className={styles.link__underlinedText + " " + gobold.className}>
-                l'espace admis
+                l&apos;espace admis
                 <div className={styles.link__underline}></div>
               </span>
             </Link>
@@ -231,9 +231,9 @@ export default function Home() {
         <div>
           <SectionTitle>Le BDE</SectionTitle>
           <p className={styles.section__text + " " + berlingskeSerif.className}>
-            Le BDE (Bureau des Élèves) est une organisation étudiante gérée <strong>par les élèves</strong>, <strong>pour les élèves</strong>. C'est une association à but non lucratif qui joue un rôle important dans la vie étudiante de notre école.<br />
-            Notre objectif est de créer un environnement enrichissant, solidaire et épanouissant tout au long de l'année.<br />
-            Cela passe par nos différentes missions : accueil des élèves, animation et organisations d'évènements, représentation et services pour les étudiants.
+            Le BDE (Bureau des Élèves) est une organisation étudiante gérée <strong>par les élèves</strong>, <strong>pour les élèves</strong>. C&apos;est une association à but non lucratif qui joue un rôle important dans la vie étudiante de notre école.<br />
+            Notre objectif est de créer un environnement enrichissant, solidaire et épanouissant tout au long de l&apos;année.<br />
+            Cela passe par nos différentes missions : accueil des élèves, animation et organisations d&apos;évènements, représentation et services pour les étudiants.
           </p>
         </div>
         <div className={styles.socials}>
@@ -268,10 +268,10 @@ export default function Home() {
         </div>
       </section>
       <section className={styles.section}>
-        <SectionTitle>L'école</SectionTitle>
+        <SectionTitle>L&apos;école</SectionTitle>
         <p className={styles.section__text + " " + berlingskeSerif.className}>
-          Depuis plus de 70 ans, l'ENSEA forme des ingénieurs généralistes reconnus dans le monde industriel et à l'international. Classée parmi les meilleures Grandes Ecoles, elle délivre 5 diplômes d'excellence, multi-certifiés et réputés.<br />
-          Grâce à la qualité de ses enseignants et à ses laboratoires de recherche de renommée internationale, l'ENSEA poursuit son objectif : former des experts de l'<strong>électronique</strong>, de l'<strong>informatique</strong> et des <strong>télécommunications</strong>, passionnés, responsables et innovants.
+          Depuis plus de 70 ans, l&apos;ENSEA forme des ingénieurs généralistes reconnus dans le monde industriel et à l&apos;international. Classée parmi les meilleures Grandes Ecoles, elle délivre 5 diplômes d&apos;excellence, multi-certifiés et réputés.<br />
+          Grâce à la qualité de ses enseignants et à ses laboratoires de recherche de renommée internationale, l&apos;ENSEA poursuit son objectif : former des experts de l&apos;<strong>électronique</strong>, de l&apos;<strong>informatique</strong> et des <strong>télécommunications</strong>, passionnés, responsables et innovants.
         </p>
         <div className={styles.section__enseaImgContainer}>
           <Image className={styles.section__enseaImg} src="/images/ensea.png" width={1140} height={810} alt="ENSEA" />
