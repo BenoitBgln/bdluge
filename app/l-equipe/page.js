@@ -141,7 +141,7 @@ export default function Home() {
                     </div>
                 </div>
                 <p className={styles.section__text + " " + berlingskeSerif.className}>
-                    Le pôle Intégration est chargé de l'intégration des premières annés au sein de l'école. Plus précisément, ils veillent sur les premières années, les orientent, ils s'occupent des activités de rentrée, le tout en bienveillance.
+                    Le pôle Intégration est chargé de l&apos;intégration des premières annés au sein de l&apos;école. Plus précisément, ils veillent sur les premières années, les orientent, ils s&apos;occupent des activités de rentrée, le tout en bienveillance.
                 </p>
             </section>
             <section className={styles.section}>
@@ -155,7 +155,7 @@ export default function Home() {
                     </div>
                 </div>
                 <p className={styles.section__text + " " + berlingskeSerif.className}>
-                    Le pôle WAC est chargé de l'organisation du Week-end d'Accueil est de Cohésion. En collaboration avec l'administration, il  organise un week-end inoubliable pour les étudiants de l'école.
+                    Le pôle WAC est chargé de l&apos;organisation du Week-end d&apos;Accueil est de Cohésion. En collaboration avec l&apos;administration, il  organise un week-end inoubliable pour les étudiants de l&apos;école.
                 </p>
             </section>
             <section className={styles.section}>
@@ -192,7 +192,7 @@ export default function Home() {
                     </div>
                 </div>
                 <p className={styles.section__text + " " + berlingskeSerif.className}>
-                    Les Respos Assos sont chargés de coordonner toutes les évènements organisés par toutes les associations de l'école.
+                    Les Respos Assos sont chargés de coordonner toutes les évènements organisés par toutes les associations de l&apos;école.
                 </p>
             </section>
             <section className={styles.section}>
@@ -203,7 +203,7 @@ export default function Home() {
                     </div>
                 </div>
                 <p className={styles.section__text + " " + berlingskeSerif.className}>
-                    Le Respo Foyer est chargé du bon fonctionnement de la salle de détente de l'école, le Foyer.
+                    Le Respo Foyer est chargé du bon fonctionnement de la salle de détente de l&apos;école, le Foyer.
                 </p>
             </section>
             <Footer />
