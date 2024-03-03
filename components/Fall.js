@@ -3,26 +3,19 @@ import { Engine, Render, Bodies, World, Runner } from 'matter-js'
 
 export default function Fall({ }) {
     const scene = useRef()
+    const parent = useRef()
     const engine = useRef(Engine.create())
-
-    // const [height, setHeight] = useState();
-    // const updateDimensions = () => {
-    //     setHeight(document.body.scrollHeight);
-    // }
-    // useEffect(() => {
-    //     window.addEventListener("resize", updateDimensions);
-    //     return () => window.removeEventListener("resize", updateDimensions);
-    // }, []);
 
     useEffect(() => {
         document.addEventListener('click', handleClick);
 
-        const cw = document.body.clientWidth
-        const ch = document.body.clientHeight
+        const cw = document.body.getBoundingClientRect().width
+        const ch = document.body.getBoundingClientRect().height
 
         const engineRef = engine.current;
         const render = Render.create({
-            element: scene.current,
+            element: parent.current,
+            canvas: scene.current,
             engine: engineRef,
             options: {
                 width: cw,
@@ -74,18 +67,18 @@ export default function Fall({ }) {
             })
         World.add(engine.current.world, [o])
     }
-
     return (
-        <div
-            ref={scene}
-            className="fallContainer"
-            style={{
-                // height: height,
-                // overflow: 'hidden',
-                zIndex: 20,
-                position: "absolute",
-                pointerEvents: "none"
-            }}
-        />
+        <>
+            {
+                <div ref={parent}>
+                    <canvas ref={scene}
+                        style={{
+                            zIndex: 20,
+                            position: "absolute",
+                            pointerEvents: "none"
+                        }} />
+                </div>
+            }
+        </>
     )
 }

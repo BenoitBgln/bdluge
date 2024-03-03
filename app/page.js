@@ -57,10 +57,9 @@ export default function Home() {
           y: 200,
           duration: 1,
         }, 2)
-        .from(`.landing__titleChar`, {
+        .from(`.${styles.landing__titleChar}`, {
           y: 30,
           opacity: 0,
-          // scaleY: 0,
           stagger: 0.08,
           duration: 1
         }, 2);
@@ -109,6 +108,44 @@ export default function Home() {
         }
       })
 
+      gsap.to(`.${styles.landing__titleChar}`, {
+        scrollTrigger: {
+          scrub: true,
+          trigger: "." + styles.landing__title,
+          start: "top 70%",
+          end: "top top"
+        },
+        rotate: -2,
+        scaleX: .9,
+        // stagger: (index, target, list) => (list.length - index) * 0.05,
+        stagger: (index, target, list) => (1 + index) * 0.05,
+        opacity: 0,
+        y: -80,
+        ease: "none"
+      });
+
+      
+      gsap.to(`.${styles.landing__imgContainer}:not(.${styles.landing__yetiContainer})`, {
+        scrollTrigger: {
+          scrub: true,
+          start: 0,
+        },
+        top: "+=800",
+        ease: "none"
+      });
+
+      gsap.to("." + styles.landing__yetiContainer, {
+        scrollTrigger: {
+          scrub: true,
+          start: 0,
+        },
+        top: "-=200",
+        ease: "none"
+      });
+
+
+
+
       gsap.from(`.${styles.section__enseaImg}`, {
         scale: 1.2,
         scrollTrigger: {
@@ -156,7 +193,7 @@ export default function Home() {
 
   return (
     <div>
-      <Menu isOpen={menuIsOpen} />
+      <Menu isOpen={menuIsOpen} currentPage="Home" />
       <CustomCursor />
       <Fall />
       <Header menuIsOpen={menuIsOpen} setMenuIsOpen={setMenuIsOpen} />
@@ -204,7 +241,7 @@ export default function Home() {
         }
         <h1 className={styles.landing__title + " " + delaGothicOne.className}>
           {
-            "BDE\u00A0ENSEA".split("").map((e, i) => <span className={"landing__titleChar"} key={i}>{e}</span>)
+            "BDE\u00A0ENSEA".split("").map((e, i) => <span className={styles.landing__titleChar} key={i}>{e}</span>)
           }
         </h1>
       </section >

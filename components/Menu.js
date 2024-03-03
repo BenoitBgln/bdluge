@@ -8,19 +8,22 @@ const NavItem = ({ text, link }) => (
     </Link>
 )
 
-export default function Menu({ isOpen }) {
+export default function Menu({ isOpen, currentPage }) {
     const navItems = [
-        { text: "Le BDE", link: "/l-equipe" },
+        { text: "Home", link: "/" },
+        { text: "L'équipe", link: "/l-equipe" },
         { text: "Nos évènements", link: "/events" },
-        { text: "Nos partenaires", link: "/partenaires" },
+        // { text: "Nos partenaires", link: "/partenaires" },
         { text: "Espace admis", link: "/espace-admis" },
-        { text: "Cotiser BDE", link: "/cotiser" },
+        // { text: "Cotiser BDE", link: "/cotiser" },
     ]
     return (
         <menu className={`menu ${isOpen ? "menu__isOpen" : ""}`}>
             <nav className="nav">
                 {
-                    navItems.map(({ text, link }, i) => <NavItem text={text} link={link} key={i} />)
+                    navItems
+                        .filter(e => e.text !== currentPage)
+                        .map(({ text, link }, i) => <NavItem text={text} link={link} key={i} />)
                 }
             </nav>
             <Footer />

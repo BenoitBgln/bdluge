@@ -127,6 +127,11 @@
   visibility: hidden;
 }
 
+.landing__titleChar {
+  position: relative;
+  opacity: 1;
+}
+
 .landing__imgContainer {
   position: absolute;
   filter: grayscale(.6);
