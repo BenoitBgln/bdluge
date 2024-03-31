@@ -18,7 +18,7 @@ export default function Home() {
             <CustomCursor />
             <Fall />
             <Header menuIsOpen={menuIsOpen} setMenuIsOpen={setMenuIsOpen} />
-            <section style={{display: "flex", minHeight: "100vh", alignItems: "center", justifyContent: "center", flexDirection: "column", fontSize: "8.3333333333vh", letterSpacing: "2px", textTransform: "uppercase"}}>
+            <section className="pageTitleContainer" >
                 <h1 className={gobold.className}>Espace admis</h1>
                 <h3 className={gobold.className}>Disponible prochainement...</h3>
             </section>

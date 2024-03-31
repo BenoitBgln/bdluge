@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import { use, useEffect, useRef, useState } from 'react';
 import { Engine, Render, Bodies, World, Runner } from 'matter-js'
 
 export default function Fall({ }) {
     const scene = useRef()
     const parent = useRef()
+    const floor = useRef();
     const engine = useRef(Engine.create())
 
     useEffect(() => {
@@ -24,11 +25,11 @@ export default function Fall({ }) {
                 background: 'transparent'
             }
         })
-
+        floor.current = Bodies.rectangle(cw / 2, ch + 10, cw, 20, { isStatic: true, render: { fillStyle: "red" } });
         World.add(engine.current.world, [
+            floor.current,
             Bodies.rectangle(cw / 2, -10, cw, 20, { isStatic: true, render: { fillStyle: "transparent" } }),
             Bodies.rectangle(-10, ch / 2, 20, ch, { isStatic: true, render: { fillStyle: "transparent" } }),
-            Bodies.rectangle(cw / 2, ch + 10, cw, 20, { isStatic: true, render: { fillStyle: "transparent" } }),
             Bodies.rectangle(cw + 10, ch / 2, 20, ch, { isStatic: true, render: { fillStyle: "transparent" } })
         ])
 
@@ -48,11 +49,16 @@ export default function Fall({ }) {
     }, [])
 
     const handleClick = e => {
+        // scene.current.height = document.body.getBoundingClientRect().height;
+        // floor.current.position.y =  500;
+        // console.log(document.body.getBoundingClientRect().height, floor.current.position.y  )
         const isOscillo = Math.random() > .2;
+        // console.log(scene.current)   
+        console.log(scene.current.getBoundingClientRect().height - document.body.getBoundingClientRect().height)
 
         const o = Bodies.rectangle(
             e.pageX,
-            e.pageY,
+            e.pageY + scene.current.getBoundingClientRect().height - document.body.getBoundingClientRect().height,
             isOscillo ? 200 : 31,
             isOscillo ? 104 : 90,
             {
@@ -75,6 +81,8 @@ export default function Fall({ }) {
                         style={{
                             zIndex: 20,
                             position: "absolute",
+                            bottom: 0,
+                            left: 0,
                             pointerEvents: "none"
                         }} />
                 </div>

@@ -1,80 +1,16 @@
 // COMMUN AUX SECTIONS ////////////////////////////////////////////////////////////////////////////
-.section {
-  margin: 27.7777777778vh auto;
-  width: 76.0416666667vw;
-
-  & .link {
-    width: max-content;
-    margin: auto;
-    font-size: 2.037037037vh;
-    line-height: 2.037037037vh;
-    letter-spacing: -0.1px;
-    cursor: pointer;
-    display: block;
-    justify-content: center;
-    align-items: center;
-    white-space: nowrap;
-
-    .link__underline {
-      transition: all .35s ease-in-out;
-      position: absolute;
-      bottom: -0.9259259259vh;
-      left: 0;
-      width: 100%;
-      height: 1.5px;
-      background-color: #1e1e1e;
-    }
-
-    .link__underlinedText {
-      margin: 0 0.9259259259vh;
-      position: relative;
-      padding: 0 5px;
-      text-transform: uppercase;
-      transition: all .35s ease-in-out;
-      font-size: 1.4814814815vh;
-      line-height: 1.9444444444vh;
-      letter-spacing: 1.07px;
-
-      &:hover {
-        letter-spacing: 2.5px;
-      }
-    }
-  }
-}
-
-.section__title {
-  font-size: 8.3333333333vh;
-  line-height: 9.2592592593vh;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  text-align: center;
-  white-space: nowrap;
-}
-
-.section__titleChar {
-  display: inline-block;
-}
-
-.section__text {
-  text-align: center;
-  font-size: 2.7777777778vh;
-  line-height: 3.4259259259vh;
-  letter-spacing: 2px;
-  margin: 9.2592592593vh auto 3.7037037037vh;
-}
-
-.section__enseaImg {
+.enseaImg {
   width: 100%;
   height: auto;
 }
 
-.section__enseaImgContainer {
+.enseaImgContainer {
   overflow: hidden;
   width: 100%;
   margin: 27.7777777778vh auto;
 }
 
-.section_admis {
+.admis {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -96,11 +32,11 @@
       font-size: 28px;
     }
 
-    .section__linkContainer {
+    .admis__linkContainer {
       text-align: center;
     }
 
-    .link {
+    .admis__link {
       display: inline;
     }
   }
@@ -110,6 +46,7 @@
 /// LANDING SECTION ///////////////////////////////////////////////////////////////////////////////
 .landing {
   height: 100vh;
+  position: relative;
 }
 
 .landing__title {
@@ -209,4 +146,35 @@
   transform: scale(0);
   transition: .3s transform;
   z-index: 8;
+}
+
+@media only screen and (max-width: 600px) {
+  .landing__imgContainer {
+    display: none;
+    &.landing__yetiContainer {
+      display: block;
+      width: 90%;
+      top: 55%;
+      filter: blur(0px);
+    }
+  }
+
+  .landing__title {
+    writing-mode: vertical-rl;
+    font-size: 10vh;
+    align-items: flex-start;
+    visibility: visible;
+  }
+
+  .admis {
+    flex-direction: column;
+  }
+
+  .socials {
+    margin: 15vh auto;
+  }
+
+  .enseaImgContainer {
+    margin: 15vh auto
+  }
 }

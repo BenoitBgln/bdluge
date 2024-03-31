@@ -7,6 +7,7 @@ import { FaSquareFacebook, FaInstagram } from "react-icons/fa6";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { animated, useSpring, easings } from '@react-spring/web'
+import { isMobile } from 'react-device-detect';
 
 import { gobold, berlingskeSerif, delaGothicOne } from '@/libs/fonts';
 import Menu from '@/components/Menu';
@@ -18,9 +19,9 @@ import styles from "./page.module.scss";
 
 const SectionTitle = ({ children }) => {
   return (
-    <h2 className={styles.section__title + " " + gobold.className}>
+    <h2 className={"section__title " + gobold.className}>
       {
-        children.replaceAll(" ", '\u00A0').split("").map((e, i) => <span className={styles.section__titleChar} key={i}>{e}</span>)
+        children.replaceAll(" ", '\u00A0').split("").map((e, i) => <span className={"section__titleChar"} key={i}>{e}</span>)
       }
     </h2>
   )
@@ -37,37 +38,44 @@ export default function Home() {
   }));
 
   useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.timeline()
-        .to(`.${styles.landing__yetiContainer}`, { filter: "blur(0px)", duration: 1 })
-        .set(`.${styles.landing__imgContainer}`, { autoAlpha: 1 }, 2.05)
-        .set(`.${styles.landing__title}`, { autoAlpha: 1 }, 2.05)
-        .from(`.${styles.landing__lugeContainer}`, {
-          x: 200,
-          y: 200,
-          duration: 1,
-        }, 2)
-        .from(`.${styles.landing__lunettesContainer}`, {
-          x: -200,
-          y: -200,
-          duration: 1,
-        }, 2)
-        .from(`.${styles.landing__pilsContainer}`, {
-          x: -200,
-          y: 200,
-          duration: 1,
-        }, 2)
-        .from(`.${styles.landing__titleChar}`, {
-          y: 30,
-          opacity: 0,
-          stagger: 0.08,
-          duration: 1
-        }, 2);
-    })
+    if (!isMobile) {
+      const ctx = gsap.context(() => {
+        gsap.timeline()
+          .to(`.${styles.landing__yetiContainer}`, { filter: "blur(0px)", duration: 1 })
+          .set(`.${styles.landing__imgContainer}`, { autoAlpha: 1 }, 2.05)
+          .set(`.${styles.landing__title}`, { autoAlpha: 1 }, 2.05)
+          .from(`.${styles.landing__lugeContainer}`, {
+            x: 200,
+            y: 200,
+            duration: 1,
+          }, 2)
+          .from(`.${styles.landing__lunettesContainer}`, {
+            x: -200,
+            y: -200,
+            duration: 1,
+          }, 2)
+          .from(`.${styles.landing__pilsContainer}`, {
+            x: -200,
+            y: 200,
+            duration: 1,
+          }, 2)
+        // .fromTo(`.${styles.landing__titleChar}`,
+        //   {
+        //     y: 30,
+        //     opacity: 0,
+        //   },
+        //   {
+        //     opacity: 1,
+        //     y: 0,
+        //     stagger: 0.08,
+        //     duration: 1
+        //   }, 2);
+      })
 
-    return () => {
-      ctx.revert();
-    };
+      return () => {
+        ctx.revert();
+      };
+    }
   }, []);
 
   const calc = (x, y) => [x - window.innerWidth / 2, y - window.innerHeight / 2];
@@ -92,103 +100,106 @@ export default function Home() {
   }
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
 
-    const ctx = gsap.context(() => {
+    if (!isMobile) {
+      gsap.registerPlugin(ScrollTrigger);
 
-      /// SCROLL REVEAL //////////////////////////////
-      gsap.from(`.${styles.section__enseaImgContainer}`, {
-        clipPath: "inset(0px 50%)",
-        ease: "power1.out",
-        scrollTrigger: {
-          trigger: `.${styles.section__enseaImgContainer}`,
-          start: "top bottom",
-          end: "top 10%",
-          scrub: true,
-        }
-      })
+      const ctx = gsap.context(() => {
 
-      gsap.to(`.${styles.landing__titleChar}`, {
-        scrollTrigger: {
-          scrub: true,
-          trigger: "." + styles.landing__title,
-          start: "top 70%",
-          end: "top top"
-        },
-        rotate: -2,
-        scaleX: .9,
-        // stagger: (index, target, list) => (list.length - index) * 0.05,
-        stagger: (index, target, list) => (1 + index) * 0.05,
-        opacity: 0,
-        y: -80,
-        ease: "none"
-      });
-
-      
-      gsap.to(`.${styles.landing__imgContainer}:not(.${styles.landing__yetiContainer})`, {
-        scrollTrigger: {
-          scrub: true,
-          start: 0,
-        },
-        top: "+=800",
-        ease: "none"
-      });
-
-      gsap.to("." + styles.landing__yetiContainer, {
-        scrollTrigger: {
-          scrub: true,
-          start: 0,
-        },
-        top: "-=200",
-        ease: "none"
-      });
-
-
-
-
-      gsap.from(`.${styles.section__enseaImg}`, {
-        scale: 1.2,
-        scrollTrigger: {
-          trigger: `.${styles.section__enseaImgContainer}`,
-          start: "top bottom",
-          scrub: true,
-        }
-      })
-
-      document.querySelectorAll(`.${styles.section__title}`).forEach(e => {
-        gsap.from(e.querySelectorAll(`.${styles.section__titleChar}`), {
-          y: 30,
-          rotate: 15,
-          opacity: 0,
-          scaleY: 0,
-          stagger: 0.08,
+        /// SCROLL REVEAL //////////////////////////////
+        gsap.from(`.${styles.enseaImgContainer}`, {
+          clipPath: "inset(0px 50%)",
+          ease: "power1.out",
           scrollTrigger: {
-            trigger: e,
+            trigger: `.${styles.enseaImgContainer}`,
             start: "top bottom",
-            end: "top 5%",
+            end: "top 10%",
             scrub: true,
           }
-        });
-      })
+        })
 
-      document.querySelectorAll(`.${styles.section__text}`).forEach(e => {
-        gsap.from(e, {
-          opacity: 0,
-          ease: "power1.in",
+        gsap.to(`.${styles.landing__titleChar}`, {
           scrollTrigger: {
-            trigger: e,
-            start: "top 100%",
-            end: "top 30%",
+            scrub: true,
+            trigger: "." + styles.landing__title,
+            start: "top 70%",
+            end: "top top"
+          },
+          rotate: -2,
+          scaleX: .9,
+          // stagger: (index, target, list) => (list.length - index) * 0.05,
+          stagger: (index, target, list) => (1 + index) * 0.05,
+          opacity: 0,
+          y: -80,
+          ease: "none"
+        });
+
+
+        gsap.to(`.${styles.landing__imgContainer}:not(.${styles.landing__yetiContainer})`, {
+          scrollTrigger: {
+            scrub: true,
+            start: 0,
+          },
+          top: "+=800",
+          ease: "none"
+        });
+
+        gsap.to("." + styles.landing__yetiContainer, {
+          scrollTrigger: {
+            scrub: true,
+            start: 0,
+          },
+          top: "-=200",
+          ease: "none"
+        });
+
+
+
+
+        gsap.from(`.${styles.enseaImg}`, {
+          scale: 1.2,
+          scrollTrigger: {
+            trigger: `.${styles.enseaImgContainer}`,
+            start: "top bottom",
             scrub: true,
           }
-        });
-      })
-      /////////////////////////////////////////////
-    })
+        })
 
-    return () => {
-      ctx.revert();
-    };
+        document.querySelectorAll(`.section__title`).forEach(e => {
+          gsap.from(e.querySelectorAll(`.section__titleChar`), {
+            y: 30,
+            rotate: 15,
+            opacity: 0,
+            scaleY: 0,
+            stagger: 0.08,
+            scrollTrigger: {
+              trigger: e,
+              start: "top bottom",
+              end: "top 5%",
+              scrub: true,
+            }
+          });
+        })
+
+        document.querySelectorAll(`.section__text`).forEach(e => {
+          gsap.from(e, {
+            opacity: 0,
+            ease: "power1.in",
+            scrollTrigger: {
+              trigger: e,
+              start: "top 100%",
+              end: "top 30%",
+              scrub: true,
+            }
+          });
+        })
+        /////////////////////////////////////////////
+      })
+
+      return () => {
+        ctx.revert();
+      };
+    }
   }, []);
 
   return (
@@ -245,29 +256,29 @@ export default function Home() {
           }
         </h1>
       </section >
-      <section className={styles.section}>
+      <section className={"section"}>
         <SectionTitle>Félicitations aux admis !</SectionTitle>
         <div>
-          <p className={styles.section__text + " " + berlingskeSerif.className}>
+          <p className={"section__text " + berlingskeSerif.className}>
             Toutes nos félicitations pour ta réussite aux concours et ton admission à l&apos;ENSEA ! 🥳<br />
             Nous sommes heureux de pouvoir te compter parmi nous l&apos;année scolaire prochaine et sommes prêts à t&apos;accueillir le lundi 4 septembre lors de la rentrée.<br />
             Avant cela, ton BDE est là pour te donner toutes les informations nécessaires pour que ton début d&apos;année se passe au mieux !
           </p>
-          <span className={styles.link + " " + berlingskeSerif.className}>
+          <span className={"link " + berlingskeSerif.className}>
             <Link href="/espace-admis">
               Voir
-              <span className={styles.link__underlinedText + " " + gobold.className}>
+              <span className={"link__underlinedText " + gobold.className}>
                 l&apos;espace admis
-                <div className={styles.link__underline}></div>
+                <div className={"link__underline"}></div>
               </span>
             </Link>
           </span>
         </div>
       </section>
-      <section className={styles.section + " " + styles.section_admis}>
+      <section className={"section " + styles.admis}>
         <div>
           <SectionTitle>Le BDE</SectionTitle>
-          <p className={styles.section__text + " " + berlingskeSerif.className}>
+          <p className={"section__text " + berlingskeSerif.className}>
             Le BDE (Bureau des Élèves) est une organisation étudiante gérée <strong>par les élèves</strong>, <strong>pour les élèves</strong>. C&apos;est une association à but non lucratif qui joue un rôle important dans la vie étudiante de notre école.<br />
             Notre objectif est de créer un environnement enrichissant, solidaire et épanouissant tout au long de l&apos;année.<br />
             Cela passe par nos différentes missions : accueil des élèves, animation et organisations d&apos;évènements, représentation et services pour les étudiants.
@@ -275,28 +286,28 @@ export default function Home() {
         </div>
         <div className={styles.socials}>
           <SectionTitle>Rejoins-nous</SectionTitle>
-          <div className={styles.section__text + " " + berlingskeSerif.className}>
+          <div className={"section__text " + berlingskeSerif.className}>
             Rejoins la communauté Ensearque sur les réseaux sociaux pour te tenir au courant des prochains évènements.
             <br /><br />
-            <div className={styles.section__linkContainer}>
+            <div className={"section__linkContainer " + styles.admis__linkContainer}>
               <FaSquareFacebook className={styles.faIcon} />
-              <span className={styles.link + " " + berlingskeSerif.className}>
+              <span className={"link " + berlingskeSerif.className + " " + styles.admis__link}>
                 <a href="https://www.facebook.com/groups/607323524520866" target='_blank'>
-                  <span className={styles.link__underlinedText + " " + gobold.className}>
+                  <span className={"link__underlinedText " + gobold.className}>
                     ENSEA Promo 2026
-                    <div className={styles.link__underline}></div>
+                    <div className={"link__underline"}></div>
                   </span>
                 </a>
               </span>
             </div>
             <br /><br />
-            <div className={styles.section__linkContainer}>
+            <div className={"section__linkContainer " + styles.admis__linkContainer}>
               <FaInstagram className={styles.instaIcon} />
-              <span className={styles.link + " " + berlingskeSerif.className}>
+              <span className={"link " + berlingskeSerif.className + " " + styles.admis__link}>
                 <a href="https://www.instagram.com/bdeensea/" target='_blank'>
-                  <span className={styles.link__underlinedText + " " + gobold.className}>
+                  <span className={"link__underlinedText " + gobold.className}>
                     BDE Ensea
-                    <div className={styles.link__underline}></div>
+                    <div className={"link__underline"}></div>
                   </span>
                 </a>
               </span>
@@ -304,14 +315,14 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className={styles.section}>
+      <section className={"section"}>
         <SectionTitle>L&apos;école</SectionTitle>
-        <p className={styles.section__text + " " + berlingskeSerif.className}>
+        <p className={"section__text " + berlingskeSerif.className}>
           Depuis plus de 70 ans, l&apos;ENSEA forme des ingénieurs généralistes reconnus dans le monde industriel et à l&apos;international. Classée parmi les meilleures Grandes Ecoles, elle délivre 5 diplômes d&apos;excellence, multi-certifiés et réputés.<br />
           Grâce à la qualité de ses enseignants et à ses laboratoires de recherche de renommée internationale, l&apos;ENSEA poursuit son objectif : former des experts de l&apos;<strong>électronique</strong>, de l&apos;<strong>informatique</strong> et des <strong>télécommunications</strong>, passionnés, responsables et innovants.
         </p>
-        <div className={styles.section__enseaImgContainer}>
-          <Image className={styles.section__enseaImg} src="/images/ensea.png" width={1140} height={810} alt="ENSEA" />
+        <div className={styles.enseaImgContainer}>
+          <Image className={styles.enseaImg} src="/images/ensea.png" width={1140} height={810} alt="ENSEA" />
         </div>
       </section>
       <Footer />
