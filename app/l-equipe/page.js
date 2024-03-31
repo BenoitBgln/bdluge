@@ -329,7 +329,7 @@ Réponse : `).includes("baise")) {
             <Header menuIsOpen={menuIsOpen} setMenuIsOpen={setMenuIsOpen} />
 
             <section className="pageTitleContainer" >
-                <h1 className={gobold.className} onMouseEnter={onTitleHover}>L'équipe</h1>
+                <h1 className={gobold.className} onMouseEnter={onTitleHover}>L&apos;équipe</h1>
             </section>
             <section className={styles.section}>
                 <h2 className={styles.section__title + " " + gobold.className}>Le Bureau</h2>
