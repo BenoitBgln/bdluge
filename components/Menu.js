@@ -12,8 +12,8 @@ export default function Menu({ isOpen, currentPage }) {
     const navItems = [
         { text: "Home", link: "/" },
         { text: "L'équipe", link: "/l-equipe" },
-        { text: "Nos évènements", link: "/events" },
-        { text: "Bons plans", link: "/bons-plans" },
+        { text: "Contact & réseaux", link: "/contact-reseaux" },
+        // { text: "Bons plans", link: "/bons-plans" },
         { text: "Espace admis", link: "/espace-admis" },
         // { text: "Cotiser BDE", link: "/cotiser" },
     ]

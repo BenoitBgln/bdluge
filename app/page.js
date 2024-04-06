@@ -85,8 +85,8 @@ export default function Home() {
   const transPils = (x, y) => `translate3d(${-x / 20}px, ${-y / 20}px, 0) rotate(${-(x + y) / 40}deg)`;
 
   const animations = [
-    { imageName: "luge4", alt: "Luge", transformFn: transLuge, className: styles.landing__lugeContainer, label: "Nos partenaires", angle: 7, link: "/partenaires" },
-    { imageName: "pils4", alt: "Pils", transformFn: transPils, className: styles.landing__pilsContainer, label: "Nos évènements", angle: -3, link: "/events" },
+    { imageName: "luge4", alt: "Luge", transformFn: transLuge, className: styles.landing__lugeContainer, label: "Contact & réseaux", angle: 7, link: "/contact-reseaux" },
+    { imageName: "pils4", alt: "Pils", transformFn: transPils, className: styles.landing__pilsContainer },
     { imageName: "lunettes4", alt: "Lunettes", transformFn: transLunettes, className: styles.landing__lunettesContainer, label: "Espace admis", angle: -2, link: "/espace-admis" },
     { imageName: "yeti2", alt: "Yéti", transformFn: transYeti, className: styles.landing__yetiContainer, label: "L'équipe", angle: 4, link: "/l-equipe" }
   ]
@@ -222,33 +222,43 @@ export default function Home() {
         }}
       >
         {
-          animations.map((e, i) => (
-            <Link
-              key={i}
-              onMouseOver={event => handleMouseOver(event, e.imageName)}
-              onMouseLeave={() => handleMouseLeave()}
-              href={e.link}
-              onClick={e => e.stopPropagation()}
-            >
+          animations.map((e, i) =>
+            e.label ?
+              (
+                <Link
+                  key={i}
+                  onMouseOver={event => handleMouseOver(event, e.imageName)}
+                  onMouseLeave={() => handleMouseLeave()}
+                  href={e.link}
+                  onClick={e => e.stopPropagation()}
+                >
+                  <animated.div
+                    className={styles.landing__imgContainer + " " + e.className}
+                    style={{ transform: props.xy.to(e.transformFn), opacity: focusOn === null || e.imageName === focusOn ? 1 : .3 }}
+                  >
+                    <Image fill={true} src={`/images/${e.imageName}.png`} alt={e.alt} />
+                  </animated.div>
+                  <div
+                    className={styles.landing__label + " " + gobold.className}
+                    style={{
+                      position: "absolute",
+                      top: `${mousePos.y}px`,
+                      left: `${mousePos.x}px`,
+                      transform: `rotate(${e.angle}deg) translateX(5%) scale(${e.imageName === focusOn ? 1 : 0})`
+                    }}
+                  >
+                    {e.label}
+                  </div>
+                </Link>
+              ) :
               <animated.div
+                key={i}
                 className={styles.landing__imgContainer + " " + e.className}
                 style={{ transform: props.xy.to(e.transformFn), opacity: focusOn === null || e.imageName === focusOn ? 1 : .3 }}
               >
                 <Image fill={true} src={`/images/${e.imageName}.png`} alt={e.alt} />
               </animated.div>
-              <div
-                className={styles.landing__label + " " + gobold.className}
-                style={{
-                  position: "absolute",
-                  top: `${mousePos.y}px`,
-                  left: `${mousePos.x}px`,
-                  transform: `rotate(${e.angle}deg) translateX(5%) scale(${e.imageName === focusOn ? 1 : 0})`
-                }}
-              >
-                {e.label}
-              </div>
-            </Link>
-          ))
+          )
         }
         <h1 className={styles.landing__title + " " + delaGothicOne.className}>
           {

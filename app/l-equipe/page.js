@@ -403,7 +403,7 @@ Réponse : `).includes("baise")) {
                         <Profile name="Ewan" imageName="ewan" role="Respo" nickname="EZT" lead={true} />
                         <Profile name="Sédrenn" imageName="sedrenn" nickname="Draines" />
                         <Profile name="Osmane" imageName="osmane" nickname="Osmane" />
-                        <Profile name="Swann" imageName="Swann" nickname="Neo" />
+                        <Profile name="Swann" imageName="swann" nickname="Neo" />
                     </div>
                 </div>
                 <p className={styles.section__text + " " + berlingskeSerif.className}>
