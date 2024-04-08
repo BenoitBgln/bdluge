@@ -20,7 +20,7 @@ export default function Home() {
             <Header menuIsOpen={menuIsOpen} setMenuIsOpen={setMenuIsOpen} />
             <section className="pageTitleContainer" >
                 <h1 className={gobold.className}>Espace admis</h1>
-                <h3 className={gobold.className}>Loading...</h3>
+                <h3 className={gobold.className}>Disponible prochainement</h3>
             </section>
             <Footer />
         </div>

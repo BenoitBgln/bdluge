@@ -101,7 +101,7 @@ export default function Home() {
                         Ensearques et futurs Ensearques
                     </h2>
                     <p className={styles.text}>
-                        Rejoignez le <strong>groupe de promo</strong> ! C&apos;est primordiale pour être informé de la vie dans l&pos;école. C&apos;est aussi ici que vous pourrez entrer en contact avec le reste de votre promo et tous les étudiants de l&apos;école !
+                        Rejoignez le <strong>groupe de promo</strong> ! C&apos;est primordiale pour être informé de la vie dans l&apos;école. C&apos;est aussi ici que vous pourrez entrer en contact avec le reste de votre promo et tous les étudiants de l&apos;école !
                     </p>
                     <div className={"section__linkContainer "}>
                         <FaSquareFacebook className={styles.faIcon} />
