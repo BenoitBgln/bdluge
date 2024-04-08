@@ -15,17 +15,8 @@ import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import CustomCursor from '@/components/CustomCursor';
 import Fall from '@/components/Fall';
+import SectionTitle from '@/components/SectionTitle';
 import styles from "./page.module.scss";
-
-const SectionTitle = ({ children }) => {
-  return (
-    <h2 className={"section__title " + gobold.className}>
-      {
-        children.replaceAll(" ", '\u00A0').split("").map((e, i) => <span className={"section__titleChar"} key={i}>{e}</span>)
-      }
-    </h2>
-  )
-}
 
 export default function Home() {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
@@ -208,6 +199,15 @@ export default function Home() {
       <CustomCursor />
       <Fall />
       <Header menuIsOpen={menuIsOpen} setMenuIsOpen={setMenuIsOpen} />
+
+
+      <div className={styles.topFade}></div>
+      <div style={{ width: "100%", overflow: "hidden", position: "absolute", top: "40vh", left: 0, height: "60vh" }}>
+        <div className={styles.titleBanner + ' ' + delaGothicOne.className}>
+          <div>BDE ENSEA</div>
+          <div>BDE ENSEA</div>
+        </div>
+      </div>
 
       <section
         className={styles.landing}
