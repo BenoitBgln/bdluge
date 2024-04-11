@@ -8,6 +8,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { animated, useSpring, easings } from '@react-spring/web'
 import Tilt from 'react-parallax-tilt';
+import Script from 'next/script';
 
 
 import { gobold, berlingskeSerif, delaGothicOne } from '@/libs/fonts';
@@ -40,13 +41,18 @@ const Profile = ({ name, role, imageName, lead, nickname }) => {
 
     return (
         <div className={styles.profile}>
+            <Script
+                src="/scripts/snow3d.js"
+                strategy="lazyOnload"
+            />
+
             <Tilt
                 // tiltReverse={true}
                 tiltMaxAngleX={15}
                 tiltMaxAngleY={15}
                 perspective={800}
                 transitionSpeed={1500}
-                gyroscope={true}
+                gyroscope={false}
                 // glareEnable={true}
                 style={{
                     transformStyle: "preserve-3d",
@@ -62,7 +68,7 @@ const Profile = ({ name, role, imageName, lead, nickname }) => {
                     tiltMaxAngleY={15}
                     perspective={800}
                     transitionSpeed={1500}
-                    gyroscope={true}
+                    gyroscope={false}
                     style={{
                         transformStyle: "preserve-3d",
                     }}
@@ -114,6 +120,7 @@ export default function Home() {
             <CustomCursor />
             <Fall />
             <Header menuIsOpen={menuIsOpen} setMenuIsOpen={setMenuIsOpen} />
+            <div className="topFade" ></div>
 
             <section className="pageTitleContainer" >
                 <h1 className={gobold.className}>L&apos;équipe</h1>
@@ -170,7 +177,7 @@ export default function Home() {
                 </p>
             </section>
             <section className={styles.section}>
-                <h2 className={styles.section__title + " " + gobold.className}>Pôle Intégration</h2>
+                <h2 className={styles.section__title + " " + gobold.className}>Pôle Accueil & Cohésion</h2>
                 <div className={styles.section__group}>
                     <div className={styles.section__row}>
                         <Profile name="Julien" imageName="julien" role="Respo" nickname="Pitchoune" lead={true} />
@@ -180,7 +187,7 @@ export default function Home() {
                     </div>
                 </div>
                 <p className={styles.section__text + " " + berlingskeSerif.className}>
-                    Le pôle Intégration est chargé de l&apos;intégration des premières annés au sein de l&apos;école. Plus précisément, ils veillent sur les premières années, les orientent, ils s&apos;occupent des activités de rentrée, le tout en bienveillance.
+                    Le pôle SAC (Semaine d&apos;Accueil et de Cohésion) est chargé de l&apos;accueil des premières annés au sein de l&apos;école. Plus précisément, ils veillent sur les premières années, les orientent, ils s&apos;occupent des activités de rentrée, le tout en bienveillance.
                 </p>
             </section>
             <section className={styles.section}>

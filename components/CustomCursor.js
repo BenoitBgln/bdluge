@@ -1,7 +1,17 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { isMobile } from 'react-device-detect';
 import AnimatedCursor from 'react-animated-cursor';
 
+
 export default function CustomCursor() {
+    const [display, setDisplay] = useState(false);
+
+    useEffect(() => {
+        if (!isMobile) {
+            setDisplay(true);
+        }
+    }, [])
+
     const cursorFocusElements = [".header__hamburger", "a"];
     useEffect(() => {
         const handleOnMouseOver = () => document.body.classList.add("cursor-focus");
@@ -28,20 +38,23 @@ export default function CustomCursor() {
     })
 
     return (
-        <AnimatedCursor
-            clickables={cursorFocusElements}
-            outerStyle={{
-                border: "1px solid var(--cursorBorder-color)",
-                background: "var(--cursor-color)",
-            }}
-            innerStyle={{
-                background: "radial-gradient(circle at center, rgba(255,255,255,.25), transparent 50%)"
-            }}
-            innerSize={150}
-            showSystemCursor={true}
-            outerSize={20}
-            innerScale={1}
-            outerScale={2}
-        />
+            display?
+            <AnimatedCursor
+                clickables={cursorFocusElements}
+                outerStyle={{
+                    border: "1px solid var(--cursorBorder-color)",
+                    background: "var(--cursor-color)",
+                }}
+                innerStyle={{
+                    background: "radial-gradient(circle at center, rgba(255,255,255,.25), transparent 50%)"
+                }}
+                innerSize={150}
+                showSystemCursor={true}
+                outerSize={20}
+                innerScale={1}
+                outerScale={2}
+            />
+            :
+            null
     )
 }

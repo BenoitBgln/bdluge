@@ -201,7 +201,7 @@ export default function Home() {
       <Header menuIsOpen={menuIsOpen} setMenuIsOpen={setMenuIsOpen} />
 
 
-      <div className={styles.topFade}></div>
+      <div className="topFade" ></div>
       <div style={{ width: "100%", overflow: "hidden", position: "absolute", top: "40vh", left: 0, height: "60vh" }}>
         <div className={styles.titleBanner + ' ' + delaGothicOne.className}>
           <div>BDE ENSEA</div>

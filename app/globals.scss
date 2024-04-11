@@ -319,10 +319,27 @@ a {
   }
 }
 
+.topFade {
+  display: none;
+}
+
 @media only screen and (max-width: 600px) {
-  .nav__item {
-  font-size: 6vh;
+  .topFade {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 45vh;
+    background: linear-gradient(180deg, #8ab1db 20%, transparent 100%);
+    pointer-events: none;
+    z-index: 6;
   }
+
+  .nav__item {
+    font-size: 6vh;
+  }
+
   .section {
     margin: 15vh auto;
 
@@ -330,7 +347,9 @@ a {
       white-space: initial;
       font-size: 6vh;
     }
+
     .section__text {
+      font-size: initial;
       text-align: justify;
     }
   }

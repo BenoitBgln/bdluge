@@ -3,6 +3,7 @@
 import { useEffect, useState, useLayoutEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import Script from 'next/script';
 import { FaSquareFacebook, FaInstagram } from "react-icons/fa6";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -70,10 +71,15 @@ export default function Home() {
 
     return (
         <div>
+            <Script
+                src="/scripts/snow3d.js"
+                strategy="lazyOnload"
+            />
             <Menu isOpen={menuIsOpen} currentPage="Contact & réseaux" />
             <CustomCursor />
             <Fall />
             <Header menuIsOpen={menuIsOpen} setMenuIsOpen={setMenuIsOpen} />
+            <div className="topFade" ></div>
 
             <section className="pageTitleContainer" >
                 <h1 className={gobold.className} >Contact & réseaux</h1>
@@ -95,7 +101,7 @@ export default function Home() {
                         </span>
                     </div>
                 </div>
-                <div className={styles.splitContainer} style={{position: "relative"}}>
+                <div className={styles.splitContainer} style={{ position: "relative" }}>
                     {/* <Image src={`/images/fb_banner.jpg`} alt="Bannière Facebook" fill={true} /> */}
                     <h2 className={gobold.className + " " + styles.section__subtitle}>
                         Ensearques et futurs Ensearques

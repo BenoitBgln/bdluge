@@ -23,14 +23,14 @@ export default function BonsPlans() {
             <Menu isOpen={menuIsOpen} currentPage="Bons plans" />
             <CustomCursor />
             <Header menuIsOpen={menuIsOpen} setMenuIsOpen={setMenuIsOpen} />
-
+            <div className="topFade" ></div>
 
             <section className={"section " + styles.navSection}>
                 <p className={"section__text"}>
                     Pour tous vos besoins quotidiens, votre BDE vous a concocté un bouquet de bons plans à utiliser sans modérations !
                 </p>
                 <div className={styles.nav__split}>
-                    <h1 className={gobold.className + " " + styles.nav__title}>Bons <br/>plans</h1>
+                    <h1 className={gobold.className + " " + styles.nav__title}>Bons <br />plans</h1>
                     <ul className={styles.nav + " " + gobold.className}>
                         <li className={styles.nav__item}>Permis de conduire</li>
                         <li className={styles.nav__item}>Cashback</li>
