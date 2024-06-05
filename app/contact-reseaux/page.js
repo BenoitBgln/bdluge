@@ -112,9 +112,9 @@ export default function Home() {
                     <div className={"section__linkContainer "}>
                         <FaSquareFacebook className={styles.faIcon} />
                         <span className={"link " + berlingskeSerif.className + " " + styles.link_inline}>
-                            <a href="https://www.facebook.com/groups/607323524520866" target='_blank'>
+                            <a href="https://www.facebook.com/groups/ensea.promo.2027" target='_blank'>
                                 <span className={"link__underlinedText " + gobold.className}>
-                                    ENSEA Promo 2026
+                                    ENSEA Promo 2027
                                     <div className={"link__underline"}></div>
                                 </span>
                             </a>

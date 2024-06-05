@@ -59,15 +59,15 @@ export default function Fall({ }) {
         const o = Bodies.rectangle(
             e.pageX,
             e.pageY + scene.current.getBoundingClientRect().height - document.body.getBoundingClientRect().height,
-            isOscillo ? 200 : 31,
-            isOscillo ? 104 : 90,
+            isOscillo ? 200 : 50,
+            isOscillo ? 104 : 87,
             {
                 mass: 10,
                 restitution: 0.9,
                 friction: 0.005,
                 render: {
                     sprite: {
-                        texture: isOscillo ? '/images/oscillo.png' : '/images/small_pils.png',
+                        texture: isOscillo ? '/images/oscillo.png' : '/images/florent.png',
                     }
                 }
             })
