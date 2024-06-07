@@ -41,12 +41,7 @@ const Profile = ({ name, role, imageName, lead, nickname }) => {
 
     return (
         <div className={styles.profile}>
-            <Script
-                src="/scripts/snow3d.js"
-                strategy="lazyOnload"
-            />
-
-            <Tilt
+            {/* <Tilt
                 // tiltReverse={true}
                 tiltMaxAngleX={15}
                 tiltMaxAngleY={15}
@@ -72,25 +67,27 @@ const Profile = ({ name, role, imageName, lead, nickname }) => {
                     style={{
                         transformStyle: "preserve-3d",
                     }}
-                >
-                    <div
-                        className={styles.profile__pictureContainer}
-                        style={{
-                            transformStyle: "preserve-3d"
-                        }}
-                    >
-                        <Image className={styles.profile__picture}
-                            style={{
-                                transform: "translateX(-50%) translateZ(40px)",
-                                filter: `drop-shadow(${-mousePosition.x / 40}px ${-mousePosition.y / 40}px 4px #44444460)`,
-                            }}
-                            fill={true}
-                            src={`/images/profiles/${imageName}.png`}
-                            alt={name}
-                        />
-                    </div>
-                </Tilt>
-            </Tilt>
+                >*/}
+            <div
+                className={styles.profile__pictureContainer}
+                style={{
+                    overflow: "hidden",
+                    borderRadius: "1000px",
+                    backgroundColor: "rgb(176, 203, 224)"
+                }}
+            >
+                <Image className={styles.profile__picture}
+                    // style={{
+                    // transform: "translateX(-50%) translateZ(40px)",
+                    // filter: `drop-shadow(${-mousePosition.x / 40}px ${-mousePosition.y / 40}px 4px #44444460)`,
+                    // }}
+                    fill={true}
+                    src={`/images/profiles/${imageName}.png`}
+                    alt={name}
+                />
+            </div>
+            {/* </Tilt>
+            </Tilt> */}
             <div className={styles.profile__name + " " + gobold.className}>
                 <p>
                     {name}
@@ -116,6 +113,11 @@ export default function Home() {
 
     return (
         <div>
+            <Script
+                src="/scripts/snow3d.js"
+                strategy="lazyOnload"
+            />
+
             <Menu isOpen={menuIsOpen} currentPage="L'équipe" />
             <CustomCursor />
             <Fall />
@@ -152,7 +154,11 @@ export default function Home() {
                         <Profile name="Matéo" imageName="mateo" role="Respo" nickname="Mateouche" lead={true} />
                         <Profile name="Nathan" imageName="nathan" nickname="La marmotte" />
                         <Profile name="Lucas" imageName="lucas" nickname="Respo Caillou" />
+                    </div>
+                    <div className={styles.section__row}>
                         <Profile name="Pierre" imageName="pierre" nickname="Pain D'Epiiiice" />
+                        <Profile name="Tim" imageName="tim" nickname="Manfou" />
+                        <Profile name="Osmane" imageName="osmane" nickname="Osmane" />
                     </div>
                 </div>
                 <p className={styles.section__text + " " + berlingskeSerif.className}>
@@ -166,7 +172,7 @@ export default function Home() {
                         <Profile name="Mathieu" imageName="mathieu" role="Respo" nickname="IvresseCH" lead={true} />
                     </div>
                     <div className={styles.section__row}>
-                        <Profile name="Guillaume" imageName="guillaume" role="Co-respo" nickname="Réguigui" />
+                        <Profile name="Guillaume" imageName="guillaume" nickname="Réguigui" />
                         <Profile name="Baptiste" imageName="baptiste" nickname="La trique " />
                         <Profile name="Adrien" imageName="adrien" nickname="Ministre" />
                         <Profile name="Louis G." imageName="louisg" nickname="Décadence" />
@@ -196,7 +202,6 @@ export default function Home() {
                     <div className={styles.section__row}>
                         <Profile name="Ewan" imageName="ewan" role="Respo" nickname="EZT" lead={true} />
                         <Profile name="Sédrenn" imageName="sedrenn" nickname="Draines" />
-                        <Profile name="Osmane" imageName="osmane" nickname="Osmane" />
                         <Profile name="Swann" imageName="swann" nickname="Neo" />
                     </div>
                 </div>
@@ -211,6 +216,7 @@ export default function Home() {
                         <Profile name="Martin" imageName="martin" role="Respo" nickname="5/6" lead={true} />
                         <Profile name="Kevin" imageName="kevin" nickname="Robin des boissons" />
                         <Profile name="Florent" imageName="florent" nickname="Batteur333 " />
+                        <Profile name="Benoît" imageName="benoit" nickname="Beubeuh" />
                     </div>
                 </div>
                 <p className={styles.section__text + " " + berlingskeSerif.className}>
